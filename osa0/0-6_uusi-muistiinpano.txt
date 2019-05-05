@@ -1,0 +1,9 @@
+note over selain:
+selain suorittaa js-koodiajoka luo muistiinpanon, 
+lisää sen muistiinpanojen listalle komennolla notes.push(note), 
+piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja 
+lähettää uuden muistiinpanon palvelimelle JSON-muodossa.
+end note
+
+selain->palvelin: HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note_spa
+palvelin-->selain: 201 created: message: "note created"
