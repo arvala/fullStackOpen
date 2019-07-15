@@ -72,6 +72,14 @@ const Button = ({ handleClick, text }) => (
 )
 
 const Statistics = (props) =>{
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return (
+      <div>
+        <h1>{props.statistics.name}</h1>
+        <p>No feedback is yet given, so no stats available.</p>
+      </div>
+    )
+  }
   return (
       <>
       <h1>{props.statistics.name}</h1>
