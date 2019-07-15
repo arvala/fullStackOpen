@@ -78,9 +78,33 @@ const Statistics = (props) =>{
       <p>{props.statistics.values[0].name} {props.good}</p>
       <p>{props.statistics.values[1].name} {props.neutral}</p>
       <p>{props.statistics.values[2].name} {props.bad}</p>
+      <p>Amount of given feedback {sumOfVotes(props)}</p>
+      <p>Average of given feedback {averageOfVotes(props)}</p>
+      <p>Positive votes of given feedback {percentageOfPositiveVotes(props)} %</p>
       </>
   )
 } 
+
+const sumOfVotes = (props) => props.good + props.neutral + props.bad
+
+const averageOfVotes = (props) =>{
+  const amount = props.good + props.neutral + props.bad
+  const sum = props.good*1 + props.neutral*0 + props.bad*-1
+  return (
+    <>
+    {sum / amount}
+    </>
+  )
+}
+
+const percentageOfPositiveVotes = (props) =>{
+  const sum = props.good + props.neutral + props.bad
+  return (
+    <>
+    {props.good / sum * 100}
+    </>
+  )
+}
 
 
 ReactDOM.render(<App />, 
