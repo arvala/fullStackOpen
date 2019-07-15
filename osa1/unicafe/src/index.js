@@ -83,15 +83,21 @@ const Statistics = (props) =>{
   return (
       <>
       <h1>{props.statistics.name}</h1>
-      <p>{props.statistics.values[0].name} {props.good}</p>
-      <p>{props.statistics.values[1].name} {props.neutral}</p>
-      <p>{props.statistics.values[2].name} {props.bad}</p>
-      <p>Amount of given feedback {sumOfVotes(props)}</p>
-      <p>Average of given feedback {averageOfVotes(props)}</p>
-      <p>Positive votes of given feedback {percentageOfPositiveVotes(props)} %</p>
+      <Statistic name= {props.statistics.values[0].name} value={props.good} />
+      <Statistic name= {props.statistics.values[1].name} value={props.neutral} />
+      <Statistic name= {props.statistics.values[2].name} value={props.bad} />
+      <Statistic name= 'Amount of given feedback' value={sumOfVotes(props)} />
+      <Statistic name= 'Average of given feedback' value={averageOfVotes(props)} />
+      <Statistic name= 'Positive votes of given feedback' value={percentageOfPositiveVotes(props)} />
       </>
   )
 } 
+
+const Statistic = ({name, value}) =>{
+  return (
+    <p>{name} {value}</p>
+  )
+}
 
 const sumOfVotes = (props) => props.good + props.neutral + props.bad
 
@@ -109,7 +115,7 @@ const percentageOfPositiveVotes = (props) =>{
   const sum = props.good + props.neutral + props.bad
   return (
     <>
-    {props.good / sum * 100}
+    {props.good / sum * 100} %
     </>
   )
 }
