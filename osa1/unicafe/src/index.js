@@ -83,19 +83,26 @@ const Statistics = (props) =>{
   return (
       <>
       <h1>{props.statistics.name}</h1>
-      <Statistic name= {props.statistics.values[0].name} value={props.good} />
-      <Statistic name= {props.statistics.values[1].name} value={props.neutral} />
-      <Statistic name= {props.statistics.values[2].name} value={props.bad} />
-      <Statistic name= 'Amount of given feedback' value={sumOfVotes(props)} />
-      <Statistic name= 'Average of given feedback' value={averageOfVotes(props)} />
-      <Statistic name= 'Positive votes of given feedback' value={percentageOfPositiveVotes(props)} />
+      <table>
+        <tbody>
+          <Statistic name= {props.statistics.values[0].name} value={props.good} />
+          <Statistic name= {props.statistics.values[1].name} value={props.neutral} />
+          <Statistic name= {props.statistics.values[2].name} value={props.bad} />
+          <Statistic name= 'Total' value={sumOfVotes(props)} />
+          <Statistic name= 'Average' value={averageOfVotes(props)} />
+          <Statistic name= 'Positives' value={percentageOfPositiveVotes(props)} />
+        </tbody>
+      </table>
       </>
   )
 } 
 
 const Statistic = ({name, value}) =>{
   return (
-    <p>{name} {value}</p>
+    <tr>
+    <td>{name}</td> 
+    <td>{value}</td>
+    </tr>
   )
 }
 
