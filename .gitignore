@@ -3,6 +3,7 @@
 # dependencies
 /osa1/kurssitiedot/node_modules
 /osa1/unicafe/node_modules
+/osa1/ankedootit/node_modules
 
 # testing
 /coverage
