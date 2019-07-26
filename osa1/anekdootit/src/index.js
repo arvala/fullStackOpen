@@ -5,13 +5,18 @@ const App = (props) => {
 
   const [selected, setSelected] = useState(0)
   const amountOfAnecdotes = props.anecdotes.length
+  let anecdoteVotes = [0, 0, 0, 0, 0, 0, 0]
 
   return (
     <div>
-      <Anecdote anecdotes= {props.anecdotes} selected = {selected}/>
+      <Anecdote anecdotes= {props.anecdotes} selected = {selected} anecdoteVotes = {anecdoteVotes}/>
       <Button
         handleClick={() => setSelected(getRandomInt(0, amountOfAnecdotes))}
         text= "new anecdote"
+      />
+      <Button
+        handleClick={() => anecdoteVotes = voteforAnecdote(selected, anecdoteVotes)}
+        text= "vote for this anecdote"
       />
     </div>
   )
@@ -60,6 +65,15 @@ const anecdotes = [
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
+  function voteforAnecdote(selected, anecdoteVotes){
+    
+    const copy = [...anecdoteVotes]
+    copy[selected] += 1 
+    copy.forEach(value => {
+        console.log(value)  // 
+      }) 
+    return copy
+  }
 
 
   ReactDOM.render(
