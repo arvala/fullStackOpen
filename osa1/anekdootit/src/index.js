@@ -5,7 +5,7 @@ const App = (props) => {
 
   const [selected, setSelected] = useState(0)
   const amountOfAnecdotes = props.anecdotes.length
-  let anecdoteVotes = [0, 0, 0, 0, 0, 0, 0]
+  const [anecdoteVotes, setAnecDoteVotes] = useState([0,0,0,0,0,0,0])
 
   return (
     <div>
@@ -15,38 +15,45 @@ const App = (props) => {
         text= "new anecdote"
       />
       <Button
-        handleClick={() => anecdoteVotes = voteforAnecdote(selected, anecdoteVotes)}
+        handleClick={() => setAnecDoteVotes(voteforAnecdote(selected, anecdoteVotes))}
         text= "vote for this anecdote"
       />
+      <AnecdoteOfTheDay anecdotes={props.anecdotes} anecdoteVotes= {anecdoteVotes}/>
     </div>
   )
 }
 
 const Button = ({ handleClick, text }) => (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
 const Anecdote = (props) =>{
-    return (
-        <>
-        <p><NewRandomAnecdote anecdotes = {props.anecdotes}/></p>
-        </>
-    )
+  return (
+      <>
+      <p>{props.anecdotes[props.selected]}</p>
+      </>
+  )
 }
 
-const NewRandomAnecdote = (props) =>{
-    const amountOfAnecdotes = props.anecdotes.length
-    const random = getRandomInt(0, amountOfAnecdotes)
-    console.log({random})
-    const chosenAnecdote = props.anecdotes[random]
-    console.log({chosenAnecdote})
-    return (
-        <>
-        <>{props.anecdotes[random]}</>
-        </>
-    )
+const AnecdoteOfTheDay = (anecdoteVotes, anecdotes) =>{
+  let largestAmountOfVotes = 0
+  let index = 0
+  var i;
+  for (i = 0; i < anecdoteVotes.length; i++) {
+    if (anecdoteVotes[i]>largestAmountOfVotes){
+      largestAmountOfVotes=anecdoteVotes[i]
+      index = i
+      console.log('index: ', index)
+    }
+  }
+  const anecdoteOfTheDay = index
+  console.log('anecdoteOfTheDay: ', anecdoteOfTheDay)
+
+  return (
+    <Anecdote anecdotes={anecdotes} selected={anecdoteOfTheDay}/>
+  )
 }
 
 const anecdotes = [
@@ -68,9 +75,10 @@ const anecdotes = [
   function voteforAnecdote(selected, anecdoteVotes){
     
     const copy = [...anecdoteVotes]
+    console.log('array length: ', copy.length)
     copy[selected] += 1 
     copy.forEach(value => {
-        console.log(value)  // 
+        console.log('amount of votes: ', value)
       }) 
     return copy
   }
