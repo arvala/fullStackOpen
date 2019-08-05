@@ -9,6 +9,7 @@ const App = (props) => {
 
   return (
     <div>
+      <h1>Here is an Anecdote for you</h1>
       <Anecdote anecdotes= {props.anecdotes} selected = {selected} anecdoteVotes = {anecdoteVotes}/>
       <Button
         handleClick={() => setSelected(getRandomInt(0, amountOfAnecdotes))}
@@ -37,22 +38,25 @@ const Anecdote = (props) =>{
   )
 }
 
-const AnecdoteOfTheDay = (anecdoteVotes, anecdotes) =>{
+const AnecdoteOfTheDay = (props) =>{
   let largestAmountOfVotes = 0
   let index = 0
-  var i;
-  for (i = 0; i < anecdoteVotes.length; i++) {
-    if (anecdoteVotes[i]>largestAmountOfVotes){
-      largestAmountOfVotes=anecdoteVotes[i]
+  for (let i = 0; i < props.anecdoteVotes.length; i++) {
+    console.log('anecdoteVotes[', i, ']: ', props.anecdoteVotes[i])
+    if (props.anecdoteVotes[i]>largestAmountOfVotes){
+      largestAmountOfVotes=props.anecdoteVotes[i]
       index = i
-      console.log('index: ', index)
     }
+    console.log('index: ', i)
   }
   const anecdoteOfTheDay = index
   console.log('anecdoteOfTheDay: ', anecdoteOfTheDay)
 
   return (
-    <Anecdote anecdotes={anecdotes} selected={anecdoteOfTheDay}/>
+    <>
+    <h1>Anecdote of the day (with most votes): </h1>
+    <Anecdote anecdotes={props.anecdotes} selected={anecdoteOfTheDay}/>
+    </>
   )
 }
 
