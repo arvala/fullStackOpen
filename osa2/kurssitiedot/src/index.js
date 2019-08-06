@@ -19,7 +19,17 @@ const App = () => {
           name: 'State of a component',
           exercises: 14,
           id: 3
-        }
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        },
+        {
+            name: 'Additional part',
+            exercises: 11,
+            id: 5
+          }
       ]
     }
   
@@ -30,47 +40,47 @@ const App = () => {
     )
   }
 
-const Course = (props) => {
+const Course = ({course}) => {
     return (
         <div>
-            <Header course={props.course}/>
-            <Content parts={props.course.parts} />
-            <Total parts={props.course.parts} />
+            <Header course={course}/>
+            <Content parts={course.parts} />
+            <Total parts={course.parts} />
         </div>
     )
 }
 
 
-const Header = (props) =>{
+const Header = ({course}) =>{
     return (
         <>
-        <h1>{props.course.name}</h1>
+        <h1>{course.name}</h1>
         </>
     )
 } 
 
-const Content = (props) =>{
+const Content = ({parts}) =>{
     return (
         <>
-        <Part part={props.parts[0].name}  exercises={props.parts[0].exercises}/>
-        <Part part={props.parts[1].name}  exercises={props.parts[1].exercises}/>
-        <Part part={props.parts[2].name}  exercises={props.parts[2].exercises}/>
+        {parts.map(part => <Part key={part.id} part = {part.name} exercises = {part.exercises}/>)}
         </>
     )
 } 
 
-const Part = (props) =>{
+const Part = ({part, exercises}) =>{
     return(
         <>
-        <p>{props.part} {props.exercises}</p>
+        <p>{part} {exercises}</p>
         </>
     )
 }
 
-const Total = (props) =>{
+const Total = ({parts}) =>{
+    console.log(parts)
+    var totalAmount = parts.reduce((sum, part) => sum + part.exercises, 0)
     return(
         <>
-        <p>Yhteensä {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises} tehtävää</p>
+        <p>Yhteensä {totalAmount} tehtävää</p>
         </>
     )
 }
