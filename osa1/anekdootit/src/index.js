@@ -87,7 +87,6 @@ const anecdotes = [
     return copy
   }
 
-
   ReactDOM.render(
     <App anecdotes={anecdotes} />,
     document.getElementById('root')
